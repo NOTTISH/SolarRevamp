@@ -1,5 +1,5 @@
 getgenv().SolarInfo = {
-  Key = "V2IsHere!"
+  Key = "V2IsHere!",
   Invite = "blahblah",
   Version = "1.0.0",
   Owner = "xurel#7777",
