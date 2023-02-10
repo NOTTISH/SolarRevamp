@@ -56,3 +56,4 @@ function CreateTab(path1, path2, pos)
 		end
 	end)
 end
+-- ex: CreateTab(script.Parent.MainButton, script.Parent.Parent.Parent.Pages.MainPage, UDim2.new(0, 2,0, 20))
