@@ -101,12 +101,12 @@ function CreateButton(parent, h, d, callback)
 			RippleEffect:Destroy()
 		else
 			errored = true
-			game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(197, 0, 26)}):Play()
+			game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(188, 0, 3)}):Play()
 			game:GetService("TweenService"):Create(parent.Description, TweenInfo.new(0.25), {TextTransparency = 1}):Play()
 			game:GetService("TweenService"):Create(parent.Header, TweenInfo.new(0.25), {TextTransparency = 1}):Play()
 			task.wait(0.25)
-			script.Parent.Header.Text = "Error!"
-			script.Parent.Description.Text = "An unknown error occured. Please report this!"
+			description.Text = "Error!"
+	        header.Text = "An unknown error occured!"
 			game:GetService("TweenService"):Create(parent.Description, TweenInfo.new(0.25), {TextTransparency = 0}):Play()
 			game:GetService("TweenService"):Create(parent.Header, TweenInfo.new(0.25), {TextTransparency = 0}):Play()
 			task.wait(5.25)
