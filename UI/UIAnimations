@@ -52,8 +52,8 @@ function CreateTab(path1, path2, pos)
                 end
                 fader.Visible = true
                 page.Visible = true
+                task.wait(0.25)
                 FadeOut()
-                task.wait(0.5)
                 cooldown = false
             end)
         end
