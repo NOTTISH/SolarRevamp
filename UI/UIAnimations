@@ -8,8 +8,8 @@ function CreateTab(path1, path2, pos)
 	--variables
 	local core = game:GetService("CoreGui") -- state coregui
 	local solar = core:FindFirstChild("SolarHub") -- state solar
-	local button = solar.Backdrop.Tabs:FindFirstChild(path1) -- state path1 (button)
-	local page = solar.Backdrop.Pages:FindFirstChild(path2) -- state path2 (page)
+	local button = solar.Backdrop.Tabs.ScrollingFrame[path1] -- state path1 (button)
+	local page = solar.Backdrop.Pages[path2]-- state path2 (page)
 	local fader = solar.Backdrop.Pages.FadeManager -- the cheap way of fading pages
 	local cooldown = false -- boolean to prevent spamming (makes the fading look bugged)
 
@@ -58,4 +58,4 @@ function CreateTab(path1, path2, pos)
 		end
 	end)
 end
--- ex: CreateTab(script.Parent.MainButton, script.Parent.Parent.Parent.Pages.MainPage, UDim2.new(0.014, 0,0.164, 0))
+-- ex: CreateTab("MainButton", "MainPage", UDim2.new(0.014, 0,0.112, 0))
