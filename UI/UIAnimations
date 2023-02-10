@@ -2,60 +2,60 @@
 
 --tab creation
 function CreateTab(path1, path2, pos)
-	--XUREL#7777 XUREL#7777--
-	--DONT CHANGE ANYTHING UNLESS YOU WANT THE WHOLE UI TO BREAK--
+    --XUREL#7777 XUREL#7777--
+    --DONT CHANGE ANYTHING UNLESS YOU WANT THE WHOLE UI TO BREAK--
 
-	--variables
-	local core = game:GetService("CoreGui") -- state coregui
-	local solar = core:FindFirstChild("SolarHub") -- state solar
-	local button = solar.Backdrop.Tabs.ScrollingFrame[path1] -- state path1 (button)
-	local page = solar.Backdrop.Pages[path2]-- state path2 (page)
-	local fader = solar.Backdrop.Pages.FadeManager -- the cheap way of fading pages
-	local cooldown = false -- boolean to prevent spamming (makes the fading look bugged)
+    --variables
+    local core = game:GetService("CoreGui") -- state coregui
+    local solar = core:FindFirstChild("SolarHub") -- state solar
+    local button = solar.Backdrop.Tabs.ScrollingFrame[path1] -- state path1 (button)
+    local page = solar.Backdrop.Pages[path2]-- state path2 (page)
+    local fader = solar.Backdrop.Pages.FadeManager -- the cheap way of fading pages
+    local cooldown = false -- boolean to prevent spamming (makes the fading look bugged)
 
-	local function FadeIn() -- fade in
-		fader.BackgroundTransparency = 1
-		fader.Visible = true
-		game:GetService("TweenService"):Create(fader, TweenInfo.new(0.25), {BackgroundTransparency = 0}):Play()
-		task.wait(0.25)
-	end
+    local function FadeIn() -- fade in
+        fader.BackgroundTransparency = 1
+        fader.Visible = true
+        game:GetService("TweenService"):Create(fader, TweenInfo.new(0.25), {BackgroundTransparency = 0}):Play()
+        task.wait(0.25)
+    end
 
-	local function FadeOut() -- fade out
-		fader.BackgroundTransparency = 0
-		fader.Visible = true
-		game:GetService("TweenService"):Create(fader, TweenInfo.new(0.25), {BackgroundTransparency = 1}):Play()
-		task.wait(0.25)
-	end
+    local function FadeOut() -- fade out
+        fader.BackgroundTransparency = 0
+        fader.Visible = true
+        game:GetService("TweenService"):Create(fader, TweenInfo.new(0.25), {BackgroundTransparency = 1}):Play()
+        task.wait(0.25)
+    end
 
 
-	--when mouse touches tab change text to blue
-	button.MouseEnter:Connect(function()
-		game:GetService("TweenService"):Create(button, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(29, 187, 255)}):Play()
-	end)
+    --when mouse touches tab change text to blue
+    button.MouseEnter:Connect(function()
+        game:GetService("TweenService"):Create(button, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(29, 187, 255)}):Play()
+    end)
 
-	--when left change back to normal color
-	button.MouseLeave:Connect(function()
-		game:GetService("TweenService"):Create(button, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(231,231,231)}):Play()
-	end)
+    --when left change back to normal color
+    button.MouseLeave:Connect(function()
+        game:GetService("TweenService"):Create(button, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(231,231,231)}):Play()
+    end)
 
-	--when clicked change tabs
-	button.MouseButton1Down:Connect(function()
-		if cooldown ~= false then
-			cooldown = true
-			pcall(function()
-				game:GetService("TweenService"):Create(solar.Backdrop.Tabs.Slider, TweenInfo.new(0.25), {Position = pos}):Play()
-				FadeIn()
-				for i, v in pairs(solar.Backdrop.Pages:GetChildren()) do
-					if v:IsA("Frame") then
-						v.Visible = false
-					end
-				end
-				fader.Visible = true
-				page.Visible = true
-				FadeOut()
-			end)
-			cooldown = false
-		end
-	end)
+    --when clicked change tabs
+    button.MouseButton1Down:Connect(function()
+        if cooldown == false then
+            cooldown = true
+            pcall(function()
+                game:GetService("TweenService"):Create(solar.Backdrop.Tabs.Slider, TweenInfo.new(0.25), {Position = pos}):Play()
+                FadeIn()
+                for i, v in pairs(solar.Backdrop.Pages:GetChildren()) do
+                    if v:IsA("Frame") then
+                        v.Visible = false
+                    end
+                end
+                fader.Visible = true
+                page.Visible = true
+                FadeOut()
+                cooldown = false
+            end)
+        end
+    end)
 end
 -- ex: CreateTab("MainButton", "MainPage", UDim2.new(0.014, 0,0.112, 0))
