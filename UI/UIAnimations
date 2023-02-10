@@ -40,7 +40,7 @@ function CreateTab(path1, path2, pos)
 
 	--when clicked change tabs
 	button.MouseButton1Down:Connect(function()
-		if cooldown ~= true then
+		if cooldown ~= false then
 			cooldown = true
 			pcall(function()
 				game:GetService("TweenService"):Create(solar.Backdrop.Tabs.Slider, TweenInfo.new(0.25), {Position = pos}):Play()
