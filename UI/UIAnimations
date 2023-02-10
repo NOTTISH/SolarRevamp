@@ -75,16 +75,16 @@ function CreateButton(parent, h, d, callback)
 	header.Text = hea
 	parent.MouseEnter:Connect(function()
 		selected = true
+		game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0,8)}):Play()
 		if errored == false then
 			game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(70,70,70)}):Play()
-			game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0,8)}):Play()
 		end
 	end)
 	parent.MouseLeave:Connect(function()
 		selected = false
+		game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0,4)}):Play()
 		if errored == false then
 			game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(80,80,80)}):Play()
-			game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0,4)}):Play()
 		end
 	end)
 	parent.MouseButton1Down:Connect(function()
