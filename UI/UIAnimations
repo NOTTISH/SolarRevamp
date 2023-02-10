@@ -1,5 +1,5 @@
 -- DONT USE THIS ITS FOR SOLAR UI DONT EDIT/MODIFY ANYTHING IN THIS CODE!!!
-
+local Tabcooldown = false
 --tab creation
 function CreateTab(path1, path2, pos)
     --XUREL#7777 XUREL#7777--
@@ -11,7 +11,6 @@ function CreateTab(path1, path2, pos)
     local button = solar.Backdrop.Tabs.ScrollingFrame[path1] -- state path1 (button)
     local page = solar.Backdrop.Pages[path2]-- state path2 (page)
     local fader = solar.Backdrop.Pages.FadeManager -- the cheap way of fading pages
-    local cooldown = false -- boolean to prevent spamming (makes the fading look bugged)
 
     local function FadeIn() -- fade in
         fader.BackgroundTransparency = 1
@@ -40,8 +39,8 @@ function CreateTab(path1, path2, pos)
 
     --when clicked change tabs
     button.MouseButton1Down:Connect(function()
-        if cooldown == false then
-            cooldown = true
+        if Tabcooldown == false then
+            Tabcooldown = true
             pcall(function()
                 game:GetService("TweenService"):Create(solar.Backdrop.Tabs.Slider, TweenInfo.new(0.25), {Position = pos}):Play()
                 FadeIn()
@@ -54,7 +53,7 @@ function CreateTab(path1, path2, pos)
                 page.Visible = true
                 task.wait(0.25)
                 FadeOut()
-                cooldown = false
+                Tabcooldown = false
             end)
         end
     end)
