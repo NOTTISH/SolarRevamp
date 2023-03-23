@@ -45,3 +45,85 @@ function ActivateButton(header, description, parent, callback)
 		end
 	end)
 end
+function ActivateToggle(header, description, parent, callback)
+	local errored = false
+	local looping = false
+	parent.Header.Text = header
+	parent.Description.Text = description
+	local function Start()
+		local succ, err = pcall(callback)
+		if succ then
+			errored = false
+		else
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Solar Hub",
+				Text = "An error occured! "..err,
+				Duration = 2.5
+			})
+			errored = true
+		end
+	end
+	parent.MouseEnter:Connect(function()
+		game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(75,75,75)}):Play()
+		game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0, 6)}):Play()
+	end)
+	parent.MouseLeave:Connect(function()
+		game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(55,55,55)}):Play()
+		game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0, 4)}):Play()
+	end)
+	parent.MouseButton1Down:Connect(function()
+		local ripple = Instance.new("Frame")
+		ripple.Parent = parent
+		ripple.Size = UDim2.new(0,0,0,0)
+		ripple.AnchorPoint = Vector2.new(0.5, 0.5)
+		ripple.Position = UDim2.new(0.498, 0,0.492, 0)
+		local corner = Instance.new("UICorner")
+		corner.Parent = ripple
+		local succ, err  = pcall(callback)
+		Start()
+		if errored == true then
+			ripple.BackgroundColor3 = Color3.fromRGB(255, 119, 119)
+			game:GetService("TweenService"):Create(ripple, TweenInfo.new(0.42), {Size = UDim2.new(0,400,0,400)}):Play()
+			game:GetService("TweenService"):Create(ripple, TweenInfo.new(0.42), {BackgroundTransparency = 1}):Play()
+			task.wait(0.42)
+			corner:Destroy()
+			ripple:Destroy()
+		else
+			local Toggle = parent.Toggle
+			if looping == false then
+				game.StarterGui:SetCore("SendNotification", {
+					Title = "Solar Hub",
+					Text = 'Successfully started "'..header..'".',
+					Duration = 2.5
+				})
+				game:GetService("TweenService"):Create(Toggle.Frame, TweenInfo.new(0.25), {Position = UDim2.new(0.793, 0,0.511, 0)}):Play()
+				game:GetService("TweenService"):Create(Toggle, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(22, 168, 0)}):Play()
+				game:GetService("TweenService"):Create(ripple, TweenInfo.new(0.42), {Size = UDim2.new(0,400,0,400)}):Play()
+				game:GetService("TweenService"):Create(ripple, TweenInfo.new(0.42), {BackgroundTransparency = 1}):Play()
+				looping = true
+				task.wait(0.42)
+				corner:Destroy()
+				ripple:Destroy()
+				repeat
+					pcall(callback)
+					task.wait()
+				until looping == false
+				game.StarterGui:SetCore("SendNotification", {
+					Title = "Solar Hub",
+					Text = 'Successfully stopped "'..header..'".',
+					Duration = 2.5
+				})
+				game:GetService("TweenService"):Create(Toggle.Frame, TweenInfo.new(0.25), {Position = UDim2.new(0.218, 0,0.511, 0)}):Play()
+				game:GetService("TweenService"):Create(Toggle, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(200, 200, 200)}):Play()
+			else
+				looping = false
+				game:GetService("TweenService"):Create(ripple, TweenInfo.new(0.42), {Size = UDim2.new(0,400,0,400)}):Play()
+				game:GetService("TweenService"):Create(ripple, TweenInfo.new(0.42), {BackgroundTransparency = 1}):Play()
+				task.wait(0.42)
+				corner:Destroy()
+				ripple:Destroy()
+			end
+			
+		end
+	end)
+end
