@@ -1,7 +1,6 @@
 function ActivateButton(header, description, parent, callback)
 	parent.Header.Text = header
 	parent.Description.Text = description
-	local mouse = game.Players.LocalPlayer:GetMouse()
 	
 	parent.MouseEnter:Connect(function()
 		game:GetService("TweenService"):Create(parent, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(75,75,75)}):Play()
@@ -12,13 +11,11 @@ function ActivateButton(header, description, parent, callback)
 		game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0, 4)}):Play()
 	end)
 	parent.MouseButton1Down:Connect(function()
-		local x = mouse.X - ripple.AbsolutePosition.X
-		local y = mouse.Y, - ripple.AbsolutePosition.Y
 		local ripple = Instance.new("Frame")
 		ripple.Parent = parent
 		ripple.Size = UDim2.new(0,0,0,0)
 		ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-		ripple.Position = UDim2.new(0, x, 0, y)
+		ripple.Position = UDim2.new(0.498, 0,0.492, 0)
 		local corner = Instance.new("UICorner")
 		corner.Parent = ripple
 		local succ, err  = pcall(callback)
@@ -49,7 +46,6 @@ function ActivateButton(header, description, parent, callback)
 	end)
 end
 function ActivateToggle(header, description, parent, callback)
-	local mouse = game.Players.LocalPlayer:GetMouse()
 	local errored = false
 	local looping = false
 	parent.Header.Text = header
@@ -76,13 +72,11 @@ function ActivateToggle(header, description, parent, callback)
 		game:GetService("TweenService"):Create(parent.UICorner, TweenInfo.new(0.25), {CornerRadius = UDim.new(0, 4)}):Play()
 	end)
 	parent.MouseButton1Down:Connect(function()
-		local x = mouse.X - ripple.AbsolutePosition.X
-		local y = mouse.Y, - ripple.AbsolutePosition.Y
 		local ripple = Instance.new("Frame")
 		ripple.Parent = parent
 		ripple.Size = UDim2.new(0,0,0,0)
 		ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-		ripple.Position = UDim2.new(0, x, 0, y)
+		ripple.Position = UDim2.new(0.498, 0,0.492, 0)
 		local corner = Instance.new("UICorner")
 		corner.Parent = ripple
 		local succ, err  = pcall(callback)
