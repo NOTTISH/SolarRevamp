@@ -17,7 +17,7 @@ function ActivateButton(header, description, parent, callback)
 		ripple.Parent = parent
 		ripple.Size = UDim2.new(0,0,0,0)
 		ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-		ripple.Position = UDim2.new(0, pos.X, 0, pos.Y - 36)
+		ripple.Position = UDim2.new(0, pos.X, 0, pos.Y)
 		local corner = Instance.new("UICorner")
 		corner.Parent = ripple
 		local succ, err  = pcall(callback)
@@ -80,7 +80,7 @@ function ActivateToggle(header, description, parent, callback)
 		ripple.Parent = parent
 		ripple.Size = UDim2.new(0,0,0,0)
 		ripple.AnchorPoint = Vector2.new(0.5, 0.5)
-		ripple.Position = UDim2.new(0, pos.X, 0, pos.Y - 36)
+		ripple.Position = UDim2.new(0, pos.X, 0, pos.Y)
 		local corner = Instance.new("UICorner")
 		corner.Parent = ripple
 		local succ, err  = pcall(callback)
