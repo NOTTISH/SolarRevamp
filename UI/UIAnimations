@@ -106,7 +106,7 @@ function ActivateToggle(header, description, parent, callback)
 				ripple:Destroy()
 				repeat
 					pcall(callback)
-					task.wait()
+					wait()
 				until looping == false
 				game.StarterGui:SetCore("SendNotification", {
 					Title = "Solar Hub",
