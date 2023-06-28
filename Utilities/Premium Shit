@@ -1,0 +1,63 @@
+getgenv().Users = {
+    Premium = {
+            3989824437,
+            4006433577,
+            859041651,
+            2580980319,
+            424883150,
+            564374063,
+            1133869735,
+            2839811203,
+            267770568,
+            195532999,
+            885873293,
+            4148978554,
+            317398046,
+            3177904794,
+            1974376892,
+            3587101817,
+            1527860228,
+            263061473,
+            4163247195,
+    },
+    Administrator = {
+            2450635720,
+            275263932,
+    },
+    Owner = {
+            759881255,
+    },
+}
+
+getgenv().Colors = {
+    Premium = Color3.fromRGB(252, 248, 0),
+    Administrator = Color3.fromRGB(0, 252, 134),
+    Owner = Color3.fromRGB(0, 218, 252),
+}
+
+function tagHandler()
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if table.find(getgenv().Users.Premium, v.UserId) then
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = getgenv().Colors.Premium
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB PREMIUM"
+        elseif table.find(getgenv().Users.Administrator, v.UserId) then
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = getgenv().Colors.Administrator
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB ADMIN"
+        elseif table.find(getgenv().Users.Owner, v.UserId) then
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = getgenv().Colors.Owner
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB OWNER"
+        end
+    end
+end
+while task.wait(3) do
+local succ, err = pcall(tagHandler)
+if not succ then
+    game.Players.LocalPlayer:Kick("Error occurred while loading premium.")
+end
+end
