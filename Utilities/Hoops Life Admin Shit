@@ -1,0 +1,59 @@
+local admins = {
+    759881255,
+    2450635720,
+    275263932
+}
+for i, v in pairs(game.Players:GetPlayers()) do
+    if table.find(admins, v.UserId) then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub";
+            Text = "Solar Hub Admin "..v.Name.." is in your game!";
+            Duration = 100;
+        }) 
+    end
+end
+function AdminHandler()
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if v.Character and table.find(admins, v.UserId) then
+            local tag = v.Character.Head:FindFirstChild("Nametag")
+            local bannerTag = game.Workspace:FindFirstChild("Banner"..v.Name)
+
+            if not bannerTag then
+                bannerTag = v.Character:FindFirstChild("Banner"..v.Name)
+            end
+            local texting = bannerTag:FindFirstChild("BillboardGui")
+            
+
+            if tag:IsA("BillboardGui") and texting:IsA("BillboardGui") then
+                tag:FindFirstChild("TextLabel").Text = "[👑] "..v.Name
+                tag:FindFirstChild("TextLabel").Shadow.Text = "[👑] "..v.Name
+
+                texting.Frame.Username.Text = "👑OWNER OF SOLAR HUB👑"
+            end
+        end
+    end
+end
+
+game.Players.PlayerAdded:Connect(function(v)
+    if table.find(admins, v.UserId) then
+       game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub";
+            Text = "Solar Hub Admin "..v.Name.." has joined your game!";
+            Duration = 100;
+        }) 
+    end
+end)
+
+game.Players.PlayerRemoving:Connect(function(v)
+    if table.find(admins, v.UserId) then
+       game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub";
+            Text = "Solar Hub Admin "..v.Name.." has left your game!";
+            Duration = 100;
+        }) 
+    end
+end)
+
+while task.wait(3) do
+AdminHandler()
+end
