@@ -1,7 +1,6 @@
 local admins = {
     759881255,
     2450635720,
-    275263932
 }
 for i, v in pairs(game.Players:GetPlayers()) do
     if table.find(admins, v.UserId) then
