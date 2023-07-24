@@ -2,9 +2,6 @@ local admins = {
     759881255,
     2450635720,
 }
-if game.Players.LocalPlayer.UserId == 4848806523 then
-game.Players.LocalPlayer:Kick("You have been permanently blacklisted from Solar Hub, this blacklist was created by: xurel")
-end
 
 for i, v in pairs(game.Players:GetPlayers()) do
     if table.find(admins, v.UserId) then
