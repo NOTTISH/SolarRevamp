@@ -74,7 +74,7 @@ if table.find(List.Premium, game.Players.LocalPlayer.UserId) or table.find(List.
     game.TextChatService.MessageReceived:Connect(function(message)
         local text = message.Text
         local id = message.TextSource.UserId
-        if table.find(List.Premium, id) or table.find(List.Admin, id) then
+        if table.find(List.Premium, id) or table.find(List.Admin, id) and game.Players.LocalPlayer.Values.InGame == false then
             if text == "!bring" then
                 for i, v in pairs(game.Players:GetPlayers()) do
                     if v.UserId == id and v.Character then
