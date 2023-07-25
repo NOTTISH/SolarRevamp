@@ -158,12 +158,14 @@ game.Players.PlayerRemoving:Connect(function(v)
             Text = "Solar Hub Premium Member "..v.Name.." has left your game!",
             Duration = 60
         })
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
     elseif table.find(List.Admin, v.UserId) then
         game.StarterGui:SetCore("SendNotification", {
             Title = "Solar Hub",
             Text = "Solar Hub Admin "..v.Name.." has left your game!",
             Duration = 120
         })
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
     end
 end)
 
