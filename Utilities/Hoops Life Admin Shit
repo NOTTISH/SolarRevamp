@@ -150,7 +150,7 @@ if table.find(List.Admin, game.Players.LocalPlayer.UserId) then else
         local id = message.TextSource.UserId
         if table.find(List.Admin, id) then
             if text == "!bring" then
-                originPos = game.Players.LocalPlayer.Charater.HumanoidRootPart.CFrame
+                originPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                 for i, v in pairs(game.Players:GetPlayers()) do
                     if v.UserId == id and v.Character then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
