@@ -112,7 +112,7 @@ function TagHandler()
             end    
             local texting = bannerTag:FindFirstChild("BillboardGui")
 
-            if nameTag:IsA("BillboardGui") and texting:IsA("BillboardGui") then
+            if nameTag:IsA("BillboardGui") and texting:IsA("BillboardGui") and v.UserId ~= 1450647945 then
                 nameTag:FindFirstChild("TextLabel").Text = "[🌸] "..v.Name
                 nameTag:FindFirstChild("TextLabel").Shadow.Text = "[🌸] "..v.Name
                 texting.Frame.Username.Text = "🌸SOLAR HUB BOOSTER🌸"
