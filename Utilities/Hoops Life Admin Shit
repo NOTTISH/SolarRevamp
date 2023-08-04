@@ -34,7 +34,7 @@ local List = {
         4875780060,
         4766222492,
         4871057813,
-        3564257928,
+        4891591844,
         1539243449,
     },
     Immunity = {
@@ -80,7 +80,7 @@ function TagHandler()
             end    
             local texting = bannerTag:FindFirstChild("BillboardGui")
 
-            if nameTag:IsA("BillboardGui") and texting:IsA("BillboardGui") then
+            if nameTag:IsA("BillboardGui") and texting:IsA("BillboardGui") and v.UserId ~= 4891591844 then
                 nameTag:FindFirstChild("TextLabel").Text = "[⭐] "..v.Name
                 nameTag:FindFirstChild("TextLabel").Shadow.Text = "[⭐] "..v.Name
                 texting.Frame.Username.Text = "⭐"..v.Name.."⭐"
